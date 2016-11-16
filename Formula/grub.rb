@@ -14,6 +14,7 @@ class Grub < Formula
   # other options ############################################################
   option "with-gfxterm", "build GRUB's graphical terminal (gfxterm)"
   option "with-grub-emu", "build optional grub-emu features"
+  option "without-test", "Skip compile-time make checks"
 
   # dependencies #############################################################
   depends_on "xorriso"
@@ -45,7 +46,7 @@ class Grub < Formula
     system "sh", "autogen.sh"
 
     mkdir "build" do
-        system "./configure", "--disable-werror",
+        system "../configure", "--disable-werror",
                               "TARGET_CC=#{target}-gcc",
                               "TARGET_OBJCOPY=#{target}-objcopy",
                               "TARGET_STRIP=#{target}-strip",
@@ -53,10 +54,11 @@ class Grub < Formula
                               "TARGET_RANLIB=#{target}-ranlib",
                               "--target=#{target}",
                               "--prefix=#{prefix}"
+        system "make", "check" if build.with? "test"
         system "make"
         system "make", "install"
     end
-    
+
   end
   #
   # test do
