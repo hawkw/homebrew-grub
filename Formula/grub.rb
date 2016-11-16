@@ -6,10 +6,7 @@ class Grub < Formula
   url "ftp://ftp.gnu.org/gnu/grub//grub-2.00.tar.xz"
   sha256 ""
   head "git://git.savannah.gnu.org/grub.git", :using => :git
-  # head "git://git.savannah.gnu.org/grub.git", :using => :git
   version "2.00"
-  # depends_on "cmake" => :build
-  # depends_on :x11 # if your formula requires any X11/XQuartz components
 
   # targets ##################################################################
   option "with-x86_64-pc-elf", "Build for the x86_64-pc-elf target"
@@ -39,26 +36,14 @@ class Grub < Formula
 
     fails_with :clang => "3.1" do
       cause "According to the official README, clang 3.2 or greater is required"
-   end
+    end
   end
-  # depends_on "gcc" => :build
-  # target_cc = if build.with?("x86_64-pc-elf") then Formula["x86_64-pc-elf-gcc"] else Nil end
-
 
   def install
     target = "x86_64-pc-elf" if build.with? "x86_64-pc-elf"
 
-    system "sh", "autogen.sh" # if build.head?
-    # target_cc = Formula["#{target}-gcc"]
-    # target_binutils = Formula["#{target}-binutils"]
-    # target_binutils_path = "#{target_binutils.bin}#{target}"
-    # build_gcc = Formula["gcc"]
-
+    system "sh", "autogen.sh"
     system "./configure", "--disable-werror",
-                        #   "BUILD_CC=#{gcc}"
-                        #   "TARGET_CC=#{target_cc.bin}/#{target_cc}",
-                        #   "TARGET_OBJCOPY=#{target_binutils_path}-objcopy",
-                        #   "TARGET_STRIP=#{target_binutils_path}-strip",
                           "TARGET_CC=#{target}-gcc",
                           "TARGET_OBJCOPY=#{target}-objcopy",
                           "TARGET_STRIP=#{target}-strip",
@@ -66,7 +51,6 @@ class Grub < Formula
                           "TARGET_RANLIB=#{target}-ranlib",
                           "--target=#{target}",
                           "--prefix=#{prefix}"
-                        #   "CC=gcc"
     system "make"
     system "make", "install"
   end
