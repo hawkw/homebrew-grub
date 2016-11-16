@@ -32,8 +32,8 @@ class Grub < Formula
   depends_on "qemu" => :build if build.with? "test"
 
   if build.with? "grub-emu"
-      depends_on "sdl" if build.with? "grub-emu"
-      depends_on "libusb" if build.with? "grub-emu"
+      depends_on "sdl" => :recommended
+      depends_on "libusb" => :optional
   end
 
   # target-specific dependenices #############################################
