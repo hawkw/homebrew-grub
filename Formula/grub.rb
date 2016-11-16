@@ -31,6 +31,11 @@ class Grub < Formula
   depends_on "freetype" if build.with? "gfxterm"
   depends_on "qemu" => :build if build.with? "test"
 
+  if build.with? "grub-emu"
+      depends_on "sdl" if build.with? "grub-emu"
+      depends_on "libusb" if build.with? "grub-emu"
+  end
+
   # target-specific dependenices #############################################
   if build.with? "x86_64-pc-elf"
     depends_on "x86_64-pc-elf-binutils" => :build
