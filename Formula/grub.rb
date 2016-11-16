@@ -43,16 +43,20 @@ class Grub < Formula
     target = "x86_64-pc-elf" if build.with? "x86_64-pc-elf"
 
     system "sh", "autogen.sh"
-    system "./configure", "--disable-werror",
-                          "TARGET_CC=#{target}-gcc",
-                          "TARGET_OBJCOPY=#{target}-objcopy",
-                          "TARGET_STRIP=#{target}-strip",
-                          "TARGET_NM=#{target}-nm",
-                          "TARGET_RANLIB=#{target}-ranlib",
-                          "--target=#{target}",
-                          "--prefix=#{prefix}"
-    system "make"
-    system "make", "install"
+
+    mkdir "build" do
+        system "./configure", "--disable-werror",
+                              "TARGET_CC=#{target}-gcc",
+                              "TARGET_OBJCOPY=#{target}-objcopy",
+                              "TARGET_STRIP=#{target}-strip",
+                              "TARGET_NM=#{target}-nm",
+                              "TARGET_RANLIB=#{target}-ranlib",
+                              "--target=#{target}",
+                              "--prefix=#{prefix}"
+        system "make"
+        system "make", "install"
+    end
+    
   end
   #
   # test do
