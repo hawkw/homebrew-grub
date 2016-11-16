@@ -18,12 +18,16 @@ class Grub < Formula
   option "with-gfxterm", "build GRUB's graphical terminal (gfxterm)"
   option "with-grub-emu", "build optional grub-emu features"
 
-  # x86_64 = "hawkw/x86_64-pc-elf/x86_64-pc-elf"
+  # dependencies #############################################################
+  depends_on "xorriso"
+
+  # build dependencies #######################################################
   depends_on "hawkw/grub/objconv" => :build
   depends_on "binutils" => :build
   depends_on :xcode => :build
-
-  depends_on "xorriso"
+  depends_on "autoconf" => :build
+  depends_on "automake" => :build
+  depends_on "python" => :build
 
   # option-specific dependencies #############################################
   depends_on "freetype" if build.with? "gfxterm"
@@ -40,18 +44,11 @@ class Grub < Formula
   # depends_on "gcc" => :build
   # target_cc = if build.with?("x86_64-pc-elf") then Formula["x86_64-pc-elf-gcc"] else Nil end
 
-  head do
-
-    depends_on "autoconf" => :build
-    depends_on "automake" => :build
-    depends_on "python" => :build
-
-  end
 
   def install
     target = "x86_64-pc-elf" if build.with? "x86_64-pc-elf"
 
-    system "sh", "autogen.sh" if build.head?
+    system "sh", "autogen.sh" # if build.head?
     # target_cc = Formula["#{target}-gcc"]
     # target_binutils = Formula["#{target}-binutils"]
     # target_binutils_path = "#{target_binutils.bin}#{target}"
