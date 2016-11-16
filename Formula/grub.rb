@@ -29,6 +29,7 @@ class Grub < Formula
 
   # option-specific dependencies #############################################
   depends_on "freetype" if build.with? "gfxterm"
+  depends_on "qemu" => :build if build.with? "test"
 
   # target-specific dependenices #############################################
   if build.with? "x86_64-pc-elf"
