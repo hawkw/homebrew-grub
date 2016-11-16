@@ -49,17 +49,24 @@ class Grub < Formula
   def install
     target = "x86_64-pc-elf" if build.with? "x86_64-pc-elf"
 
+    args = %W[
+      --disable-werror
+      --target=#{target}
+      --prefix=#{prefix}
+      TARGET_CC=#{target}-gcc
+      TARGET_OBJCOPY=#{target}-objcopy
+      TARGET_STRIP=#{target}-strip
+      TARGET_NM=#{target}-nm
+      TARGET_RANLIB=#{target}-ranlib
+    ]
+
+    args << "--host=#{target}" if build.with? "grub-emu"
+    # args << ""
+
     system "sh", "autogen.sh"
 
     mkdir "build" do
-        system "../configure", "--disable-werror",
-                              "TARGET_CC=#{target}-gcc",
-                              "TARGET_OBJCOPY=#{target}-objcopy",
-                              "TARGET_STRIP=#{target}-strip",
-                              "TARGET_NM=#{target}-nm",
-                              "TARGET_RANLIB=#{target}-ranlib",
-                              "--target=#{target}",
-                              "--prefix=#{prefix}"
+        system "../configure", *args
         system "make", "check" if build.with? "test"
         system "make"
         system "make", "install"
