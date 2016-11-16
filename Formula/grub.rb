@@ -3,11 +3,11 @@
 class Grub < Formula
   desc "GNU GRUB bootloader"
   homepage "https://www.gnu.org/software/grub/"
-  url "git://git.savannah.gnu.org/grub.git"
+  url "ftp://ftp.gnu.org/gnu/grub//grub-2.00.tar.xz"
   sha256 ""
   head "git://git.savannah.gnu.org/grub.git", :using => :git
   # head "git://git.savannah.gnu.org/grub.git", :using => :git
-  version "2.02"
+  version "2.00"
   # depends_on "cmake" => :build
   # depends_on :x11 # if your formula requires any X11/XQuartz components
 
