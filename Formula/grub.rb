@@ -16,12 +16,14 @@ class Grub < Formula
 
   # other options ############################################################
   option "with-gfxterm", "build GRUB's graphical terminal (gfxterm)"
-  option "with grub-emu", "build optional grub-emu features"
+  option "with-grub-emu", "build optional grub-emu features"
 
   # x86_64 = "hawkw/x86_64-pc-elf/x86_64-pc-elf"
   depends_on "hawkw/grub/objconv" => :build
   depends_on "binutils" => :build
   depends_on :xcode => :build
+
+  depends_on "xorriso"
 
   # option-specific dependencies #############################################
   depends_on "freetype" if build.with? "gfxterm"
