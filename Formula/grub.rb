@@ -22,7 +22,6 @@ class Grub < Formula
   # build dependencies #######################################################
   depends_on "hawkw/grub/objconv" => :build
   depends_on "binutils" => :build
-  depends_on :xcode => :build
   depends_on "autoconf" => :build
   depends_on "automake" => :build
   depends_on "python" => :build
