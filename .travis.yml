@@ -6,4 +6,4 @@ script:
   - brew update
   - brew tap hawkw/x86_64-pc-elf
   - brew tap hawkw/grub
-  - travis_wait 60 brew install grub --with-x86_64-pc-elf
+  - travis_wait 120 brew install grub --with-x86_64-pc-elf
