@@ -1,7 +1,7 @@
 class Objconv < Formula
   desc "Object file converter and disassembler"
-  homepage "http://www.agner.org/optimize/#objconv"
-  url "http://www.agner.org/optimize/objconv.zip"
+  homepage "https://www.agner.org/optimize/#objconv"
+  url "https://www.agner.org/optimize/objconv.zip"
   version "2.49"
   sha256 "f2c0c4cd6ff227e76ffed5796953cd9ae9eb228847ca9a14dba6392c573bb7a4"
   def install
