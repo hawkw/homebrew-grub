@@ -1,14 +1,10 @@
 class Objconv < Formula
   desc "Object file converter and disassembler"
-  homepage "https://www.agner.org/optimize/#objconv"
-  url "https://www.agner.org/optimize/objconv.zip"
-  version "2.49"
-  sha256 "f2c0c4cd6ff227e76ffed5796953cd9ae9eb228847ca9a14dba6392c573bb7a4"
+  homepage "https://github.com/gitGNU/objconv"
+  url "https://github.com/gitGNU/objconv/archive/v2.50.tar.gz"
+  version "2.50"
+  sha256 "b14fcdcee14f9db9e9c89f53482df8d84a2979dbbf6b4cdc556972b2653a1b86"
   def install
-    system "unzip", "source.zip",
-                    "-dsrc"
-    # objconv doesn't have a Makefile, so we have to call
-    # the C++ compiler ourselves
     system ENV.cxx, "-o", "objconv",
                     "-O2",
                     *Dir["src/*.cpp"],
